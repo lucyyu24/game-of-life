@@ -1,0 +1,16 @@
+#environment {
+	width: 750px;
+	height: 750px;
+	line-height: 0;
+	border: 1px solid black;
+	margin: 140px auto 0px;
+}
+
+body {
+	text-align: center;
+}
+
+.cell {
+	background-color: white;
+	display: inline-block;
+}
