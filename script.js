@@ -25,7 +25,7 @@ function initCells (dim) {
 
 	if (dim < 0) dim = 0;
     else if (dim > 70) dim = 90;
-    var len = 800 / dim;
+    var len = 750 / dim;
     for (var i = 0; i < dim; i++) {
     	if (!cellArray[i]) cellArray[i] = [];
         for (var k = 0; k < dim; k++) {
@@ -63,19 +63,19 @@ function update (dim) {
 
         	if (i-1 >= 0) {
                 if (cellArray[i-1][k] == 1) {liveCells++;}
-        		if (k-1 >= 0) {if (cellArray[i-1][k-1] == 1) {liveCells++;}}
+        		if (k-1 >= 0) {if (cellArray[i-1][k-1] == 1) liveCells++;}
         	}
         	if (i+1 < dim) {
                 if (cellArray[i+1][k] == 1) {liveCells++;}
-        		if (k+1 <dim) {if (cellArray[i+1][k+1] == 1) {liveCells++;}}
+        		if (k+1 <dim) {if (cellArray[i+1][k+1] == 1) liveCells++;}
         	}
         	if (k-1 >= 0) {
         		if (cellArray[i][k-1] == 1) {liveCells++;}
-        		if (i+1 <dim) {if (cellArray[i+1][k-1] == 1) {liveCells++;}}
+        		if (i+1 <dim) {if (cellArray[i+1][k-1] == 1) liveCells++;}
         	}
         	if (k+1 <dim) {
         		if (cellArray[i][k+1] == 1) {liveCells++;}
-        		if (i-1 >=0) {if (cellArray[i-1][k+1] == 1) {liveCells++;}}
+        		if (i-1 >=0) {if (cellArray[i-1][k+1] == 1) liveCells++;}
         	}
 
             var element = document.getElementById(i+"," +k);
@@ -96,11 +96,6 @@ function update (dim) {
 
         }
     }
-
-    function countCell (val) {
-    	if (val == 1) {liveCells++;}
-    }
-
 
 	setTimeout(function() {update(dim);}, 100); 
 }
