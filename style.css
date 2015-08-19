@@ -1,9 +1,9 @@
 #environment {
-	width: 750px;
-	height: 750px;
+	width: 800px;
+	height: 800px;
 	line-height: 0;
-	border: 1px solid black;
-	margin: 140px auto 0px;
+	border: 1px solid #F1C4BE;
+	margin: 0px auto 0px;
 }
 
 body {

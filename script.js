@@ -3,7 +3,7 @@ var cellArray;
 var pink; 
 
 $(document).ready(function() {
-    dim = 50; 
+    dim = 55; 
     pink  = "#F1C4BE"; 
 
 	initCells(dim);
@@ -25,7 +25,7 @@ function initCells (dim) {
 
 	if (dim < 0) dim = 0;
     else if (dim > 70) dim = 90;
-    var len = 750 / dim;
+    var len = 800 / dim;
     for (var i = 0; i < dim; i++) {
     	if (!cellArray[i]) cellArray[i] = [];
         for (var k = 0; k < dim; k++) {
@@ -35,7 +35,7 @@ function initCells (dim) {
         }
     }
 
-    $('div.cell').click (function () {
+    $('div.cell').hover(function () {
     		$(this).css("background-color", pink);
     	}
     );
@@ -60,42 +60,45 @@ function update (dim) {
 	for (var i = 0; i < dim; i++) {
         for (var k = 0; k < dim; k++) {
         	var liveCells =0 ;
-        	var deadCells =0; 
 
         	if (i-1 >= 0) {
-        		countCell (cellArray[i-1][k]);
-        		if (k-1 >= 0) countCell ( cellArray[i-1][k-1] );
+                if (cellArray[i-1][k] == 1) {liveCells++;}
+        		if (k-1 >= 0) {if (cellArray[i-1][k-1] == 1) {liveCells++;}}
         	}
         	if (i+1 < dim) {
-        		countCell ( cellArray[i+1][k] );
-        		if (k+1 <dim) countCell ( cellArray[i+1][k+1] );
+                if (cellArray[i+1][k] == 1) {liveCells++;}
+        		if (k+1 <dim) {if (cellArray[i+1][k+1] == 1) {liveCells++;}}
         	}
         	if (k-1 >= 0) {
-        		countCell ( cellArray[i][k-1] );
-        		if (i+1 <dim) countCell ( cellArray[i+1][k-1] );
+        		if (cellArray[i][k-1] == 1) {liveCells++;}
+        		if (i+1 <dim) {if (cellArray[i+1][k-1] == 1) {liveCells++;}}
         	}
         	if (k+1 <dim) {
-        		countCell ( cellArray[i][k+1] );
-        		if (i-1 >=0) countCell ( cellArray[i-1][k+1] );
+        		if (cellArray[i][k+1] == 1) {liveCells++;}
+        		if (i-1 >=0) {if (cellArray[i-1][k+1] == 1) {liveCells++;}}
         	}
 
             var element = document.getElementById(i+"," +k);
 
-        	if (liveCells > 3){
-				element.style.backgroundColor="white";
-        	} else if (liveCells < 2) {
-				element.style.backgroundColor="white";
-            } else if (deadCells == 3) {
-                element.style.backgroundColor=pink;
-            } else if (liveCells == 2 || liveCells == 3) {
-        		element.style.backgroundColor=pink;
-        	}
+            if (cellArray[i][k] == 1) {
+                if (liveCells == 2 || liveCells == 3) {
+                    element.style.backgroundColor=pink;
+                } else {
+                    element.style.backgroundColor="white";
+                }
+            } else {
+                if (liveCells == 3 ) {
+                    element.style.backgroundColor=pink;
+                } else {
+                    element.style.backgroundColor="white";
+                }
+            }
+
         }
     }
 
     function countCell (val) {
     	if (val == 1) {liveCells++;}
-    	if (val == 0) {deadCells++;}
     }
 
 
